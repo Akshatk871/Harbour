@@ -1,0 +1,21 @@
+<%- include("partials/header") %>
+<div class="row">
+  <% newPet.forEach((pet)=>{ %>
+    <div class="tab-col col-lg-4 col-md-6">
+        
+        <div class="card" style="width: 18rem;">
+          <img src="/images/<%=pet.image%>" class="card-img-top" height="200px" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"> <%=pet.name %> </h5>
+            
+            <a href="#" class="btn btn-primary">Adopt</a>
+          </div>
+        </div>
+      
+    
+   
+</div>         
+ <%  }) %>  
+  
+</div>
+<%- include("partials/footer") %>

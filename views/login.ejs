@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+<div class="login-page">
+    <img class="background-image" src="/images/login-background.jpg" alt="">
+    <div class="login-inner">
+        <h1 class="login">Login Here</h1>
+        <div class="form">
+            <form action="/login" method="post">
+                <div class="form-component">
+                    <label for="">Email Id</label>
+                    <input class="input" type="email" name="username" id="">
+                </div>
+                <div class="form-component">
+                    <label for="">Password</label>
+                    <input class="input" type="password" name="password" id="">
+                </div>
+                <div class="form-component">
+                    <button class=" btn btn-outline-dark btn-dark" type="submit">Login</button>
+                </div>
+                <div class="form-component">
+                    <p>Create an account <a href="/register">Register Here</a> </p>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+<%- include("partials/footer") %>
