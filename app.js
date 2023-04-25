@@ -110,17 +110,31 @@ app.get("/login", (req,res)=>{
 app.get("/register", (req,res)=>{
     res.render("register");
 })
+
+    
 app.get("/adopt", (req,res)=>{
     
-    Pet.find({}).then((foundPet)=>{
-        if(foundPet.length===0){
-            Pet.insertMany(defaultPet);
-        }
-        res.render("adopt",{newPet: foundPet} );
-    });
+    if(req.isAuthenticated()){
+        Pet.find({}).then((foundPet)=>{
+            if(foundPet.length===0){
+                Pet.insertMany(defaultPet);
+            }
+            res.render("adopt",{newPet: foundPet} );
+        });
+    
+    }
+    else{
+        res.redirect("/login");
+    }
 
 
     
+});
+app.get("/logout", (req,res)=>{
+    req.logout(req.user, err => {
+        if(err) return next(err);
+        res.redirect("/");
+      });
 });
 app.get("/report", (req,res)=>{
     res.render("report");
