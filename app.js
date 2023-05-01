@@ -14,6 +14,7 @@ const app=express();
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.json());
 
 app.use(session({
     secret:process.env.SECRET,
@@ -36,14 +37,18 @@ const petSchema=new mongoose.Schema({
     name:String,
     rating: Number,
     about:String,
-    image:String
+    image:String,
+    adopt: Boolean
 });
+
+
 
 userSchema.plugin(passportLocalMongoose);
 
 const User = new mongoose.model("User" , userSchema);
 
 const Pet =new mongoose.model("Pet", petSchema);
+
 
 passport.use(User.createStrategy());
 
@@ -63,36 +68,42 @@ const pet1= new Pet({
     name:"Golden Retriever",
     rating: 8,
     about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image:"Golden-retriever.jpg"
+    image:"Golden-retriever.jpg",
+    adopt: false
 });
 const pet2= new Pet({
     name:"Persian Cat",
     rating: 8,
     about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image:"Persian-Cat.jpg"
+    image:"Persian-Cat.jpg",
+    adopt: false
 });
 const pet3= new Pet({
     name:"Retired Army Dogs",
     rating: 8,
     image: "Retired-army-dog.jpg",
-    about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    adopt: false
 });
 const pet4= new Pet({
     name:"Rescued Cat",
     rating: 8,
     image:"Rescued-cat.jpg",
+    adopt: false,
     about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 });
 const pet5= new Pet({
     name:"Rescued Dog",
     rating: 8,
     image:"Rescued-dog.jpg",
+    adopt: false,
     about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 });
 const pet6= new Pet({
     name:"Rabbit",
     rating: 8,
     image:"Rabbit.jpg",
+    adopt: false,
     about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 });
 
@@ -125,11 +136,14 @@ app.get("/adopt", (req,res)=>{
     }
     else{
         res.redirect("/login");
-    }
-
-
-    
+    }    
 });
+
+app.post("/adopt", async (req,res)=>{
+    const pet = await Pet.findByIdAndUpdate(req.body.id, {adopt:true});
+    res.json({message:"Congrats! You have adopted "+pet.name});
+});
+
 app.get("/logout", (req,res)=>{
     req.logout(req.user, err => {
         if(err) return next(err);
