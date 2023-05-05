@@ -172,7 +172,7 @@ app.post("/login",(req,res)=>{
     });
 });
 app.post("/register",(req,res)=>{
-    User.register({username:req.body.username}, req.body.password , (err, user)=>{
+    User.register({username:req.body.username, name: req.body.name}, req.body.password , (err, user)=>{
         if(err){
             console.log(err);
             res.redirect("/register");
