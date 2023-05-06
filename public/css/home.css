@@ -1,0 +1,108 @@
+body, html {
+    height: 100%;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .bg-image {
+    /* The image used */
+    background-image: url("https://cdn.pixabay.com/photo/2017/12/27/14/02/friends-3042751_960_720.jpg");
+  
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+  
+    height: 70%;
+  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  /* Position text in the middle of the page/image */
+  .bg-text {
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0, 0.4); 
+    color: white;
+    font-weight: bold;
+    /* border: 3px solid #f1f1f1; */
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .typewrite{
+    color: white;
+  }
+
+  .harbour-title{
+    font-size: 7rem;
+  }
+
+  .process .inner{
+    background-color: rgb(255, 255, 255);
+    max-width: 80%;
+    width: 80%;
+    margin: -9rem auto 1rem auto; 
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    box-shadow: 0 0 5px 10px #ffffff;
+  }
+
+.fulldiv{
+    width: 80%;
+    max-width: 80%;
+    /* background-color: aqua; */
+    margin: 1rem auto;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 0rem 3rem;
+}
+
+.right{
+    margin: auto 2rem;
+}
+
+.right a{
+    color: rgb(255, 255, 255);
+    padding: auto;
+}
+
+.right a:hover{
+    color: rgb(255, 241, 214);
+}
+
+.petimage{
+    width: 27rem;
+    /* animation: floating 3s ease-in-out infinite */
+}
+
+.slogan{
+    color: rgb(255, 174, 0);
+}
+
+.desc{
+    color: rgb(50, 50, 50);
+}
+
+.floating { 
+    animation-name: floating;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    /* margin-left: 30px; */
+    margin-top: 5px;
+}
+ 
+@keyframes floating {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 20px); }
+    100%   { transform: translate(0, -0px); }   
+}

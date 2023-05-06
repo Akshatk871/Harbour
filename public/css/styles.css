@@ -5,9 +5,7 @@ body{
     
 }
 .navbar{
-    background-color: rgb(129, 145, 225);
-    
-
+    background-color: rgb(248, 202, 102);
 }
 .navbar-brand{
     font-family: 'Alkatra', cursive;
@@ -41,8 +39,6 @@ body{
 } */
 .row{
     margin:5% 7%;
-   
-   
 } 
 .login-page, .report{
     min-height: 600px;

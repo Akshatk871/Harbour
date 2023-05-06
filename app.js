@@ -154,6 +154,10 @@ app.get("/report", (req,res)=>{
     res.render("report");
 });
 
+app.get("/about", (req,res)=>{
+    res.render("about");
+});
+
 app.post("/login",(req,res)=>{
     const user=new User({
         username:req.body.username, 
