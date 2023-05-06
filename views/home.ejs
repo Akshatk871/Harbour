@@ -1,63 +1,75 @@
-<%- include("partials/header") %>
-<div id="carouselExample" class="carousel slide carousel-fade">
-    <div class="carousel-inner">
-      <div class="carousel-item">
-        <img src="https://d3nn873nee648n.cloudfront.net/900x600/18562/220-SM838844.jpg" class="d-block w-50" alt="...">
-      </div>
-      <div class="carousel-item active">
-        <img src="https://d3nn873nee648n.cloudfront.net/900x600/3214/20-SM107785.jpg" class="d-block w-50" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="https://d3nn873nee648n.cloudfront.net/900x600/11749/19-SM355309.jpg" class="d-block w-50" alt="...">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" ></span>
-     
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" ></span>
-      
-    </button>
-  </div>
-
-  <hr>
-
-
-  <div class="row">
-    <div class="tab-col col-lg-4 col-md-6">
-        <div class="card" style="width: 18rem;">
-            <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&w=1000&q=80" class="card-img-top" height="200px" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-    </div>
-    
-      <div class="tab-col col-lg-4 col-md-6">
-        <div class="card" style="width: 18rem;">
-            <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&w=1000&q=80" class="card-img-top" height="200px" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-      </div>
-     
-      <div class="tab-col col-lg-4">
-        <div class="card" style="width: 18rem;">
-            <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&w=1000&q=80" class="card-img-top" height="200px" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-      </div>
-      
-  </div>
+<%-include ("partials/header")%>
   
-<%- include("partials/footer") %>
+  <section class="d-flex align-items-center">
+    <div class="quote__container">
+      <div class="quote_image_overlay"></div>
+      <h3 class="quote_image_text">
+        Protect, rescue, adopt, repeat
+      </h3>
+    </div>
+  </section>
+
+  <section class="process center">
+    <h1>The Adoption Process</h1>
+    <div class="row d-flex">
+      <span class="col-4">
+        <h3>Application</h3>
+        When you’ve found your new pet, you’re ready to fill out the application! Someone will get back to you within 48
+        hours of submission.
+      </span>
+      <span class="col-4">
+        <h3>Approval</h3>
+        Once you are approved, a volunteer or foster parent will reach out to you to schedule a meet and greet with the
+        soon to be pet.
+      </span>
+      <span class="col-4">
+        <h3>Home Visit</h3>
+        After the meet and greet, we’ll schedule a home visit for your soon to be pet to get acquainted with their new
+        environment..
+      </span>
+    </div>
+
+    <div class="center container">
+      <h2>The Home Visit</h2>
+      If the home visit goes well, you’ll start a 10 day trial with your potential new pet! We’ll collect the adoption
+      at this time and will offer full refund of adoption fee if the pet is returned for any reason in the first 10
+      days. You can pay the fee via credit card, check, or website donation.
+    </div>
+  </section>
+
+  <section class="make-a-difference">
+    <h1 class="center">Make a Difference</h1>
+    <div class="card-group mx-5">
+      <div class="card">
+        <img
+          src="https://thumbs.dreamstime.com/b/adopt-logo-dont-shop-adopt-adoption-concept-vector-illustration-81826635.jpg"
+          class="card-img-top" alt="Adopt">
+        <div class="card-body">
+          <h5 class="card-title">Adopt a Pet</h5>
+          <p class="card-text">Have space in your home and heart. These pups and kittens will fill both of them.</p>
+          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://safepetssafefamilies.org.au/wp-content/uploads/2020/07/logo-spfoster.png" class="card-img-top"
+          alt="Foster">
+        <div class="card-body">
+          <h5 class="card-title">Foster</h5>
+          <p class="card-text">Help us by fostering a pet until they are ready for a permanent home.</p>
+          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://thumbs.dreamstime.com/b/donation-icon-rectangular-box-paw-print-help-animals-pets-wildlife-concept-linear-logo-poster-black-white-donation-icon-174260379.jpg"
+          class="card-img-top" alt="Donate">
+        <div class="card-body">
+          <h5 class="card-title">Donate</h5>
+          <p class="card-text">Donate for a good cause. Your donation could help rescue a precious life. </p>
+          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include("partials/footer") %>
