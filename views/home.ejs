@@ -1,41 +1,74 @@
 <%-include ("partials/header")%>
+<link rel="stylesheet" href="/css/home.css"></link>
   
-  <section class="d-flex align-items-center">
-    <div class="quote__container">
-      <div class="quote_image_overlay"></div>
-      <h3 class="quote_image_text">
-        Protect, rescue, adopt, repeat
-      </h3>
-    </div>
-  </section>
+<div class="bg-image"></div>
 
-  <section class="process center">
-    <h1>The Adoption Process</h1>
+<div class="bg-text">
+  <h1 class="harbour-title">Harbour</h1>
+  <h4>
+    <a href="" class="typewrite" data-period="2000" data-type='[ "Protect...!", "Rescue...!", "Adopt...!" ]'>
+      <span class="wrap"></span>
+    </a>
+  </h4>
+</div>
+
+  <div class="process center">
+    <div class="inner">
+    <h1 class="text-dark">The Adoption Process</h1>
     <div class="row d-flex">
-      <span class="col-4">
-        <h3>Application</h3>
+      <span class="col-4 text-secondary">
+        <h3 class="text-dark">Application</h3>
         When you’ve found your new pet, you’re ready to fill out the application! Someone will get back to you within 48
         hours of submission.
       </span>
-      <span class="col-4">
-        <h3>Approval</h3>
+      <span class="col-4 text-secondary">
+        <h3 class="text-dark">Approval</h3>
         Once you are approved, a volunteer or foster parent will reach out to you to schedule a meet and greet with the
         soon to be pet.
       </span>
-      <span class="col-4">
-        <h3>Home Visit</h3>
+      <span class="col-4 text-secondary">
+        <h3 class="text-dark">Home Visit</h3>
         After the meet and greet, we’ll schedule a home visit for your soon to be pet to get acquainted with their new
         environment..
       </span>
     </div>
+   
 
-    <div class="center container">
-      <h2>The Home Visit</h2>
+    <div class="center container text-secondary">
+      <h2 class="text-dark">The Home Visit</h2>
       If the home visit goes well, you’ll start a 10 day trial with your potential new pet! We’ll collect the adoption
       at this time and will offer full refund of adoption fee if the pet is returned for any reason in the first 10
       days. You can pay the fee via credit card, check, or website donation.
     </div>
+  </div>
+  </div>
+
+
+  <section class="center pets">
+    <div class="fulldiv">
+      <div class="left floating">
+        <img src="/images/home/image1.png" class="petimage">
+      </div>
+      <div class="right">
+        <h4 class="slogan">Adopt a pet, save a life and gain a forever friend!</h4>
+        <p class="px-4 center desc">Adopting a pet is a wonderful way to bring a new, loving companion into your life while also providing a second chance for an animal in need. By adopting from a shelter or rescue organization, you are not only gaining a new best friend but also helping to reduce the number of homeless pets in your community. </p>
+        <a href="/adopt" class="btn btn-warning">Adopt</a>
+      </div>
+    </div>
+
+      <div class="fulldiv">
+        <div class="right">
+          <h4 class="slogan">Save our planet's precious animals - protect, respect, and cherish!</h4>
+          <p class="px-4 center desc">Protecting animals is essential for the sustainability of our planet's ecosystems and the well-being of all living beings. To ensure that animals are treated with respect and care, we need to take action at both individual and collective levels. </p>
+          <a href="/report" class="btn btn-warning">Report</a>
+        </div>
+        <div class="left floating">
+          <img src="/images/home/image2.png" class="petimage">
+        </div>
+    </div>
+
   </section>
+
 
   <section class="make-a-difference">
     <h1 class="center">Make a Difference</h1>
@@ -71,5 +104,7 @@
       </div>
     </div>
   </section>
+
+  <script src="/css/home.js"></script>
 
   <%- include("partials/footer") %>
