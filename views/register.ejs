@@ -1,32 +1,76 @@
 <%- include("partials/header") %>
 <div class="login-page">
-    <img class="background-image" src="/images/login-background.jpg" alt="">
-    <div class="login-inner">
-        <h1 class="login">Register Here</h1>
-        <div class="form">
-            <form action="/register" method="post">
-                <div class="form-component">
-                    <label for="">Name</label>
-                    <input class="input" type="text" name="name" >
-                </div>
-                <div class="form-component">
-                    <label for="">Email Id</label>
-                    <input class="input" type="email" name="username" id="">
-                </div>
-                <div class="form-component">
-                    <label for="">Password</label>
-                    <input class="input" type="password" name="password" id="">
-                </div>
-                <div class="form-component">
-                    <button class=" btn btn-outline-dark btn-dark" type="submit">Register</button>
-                </div>
-                <div class="form-component">
-                    <p>Create an account <a href="/login">Login Here</a> </p>
-                </div>
-            </form>
+  <img class="background-image" src="/images/login-background.jpg" alt="" />
+  <div class="login-inner">
+    <h1 class="login">Register Here</h1>
+    <div class="form">
+      <div>
+        <div class="form-component">
+          <label for="">Name</label>
+          <input class="input" type="text" name="name" />
         </div>
-        
+        <div class="form-component">
+          <label for="">Email Id</label>
+          <input class="input" type="email" name="username" id="username" />
+        </div>
+        <div class="form-component">
+          <label for="">Password</label>
+          <input class="input" type="password" name="password" id="password" />
+        </div>
+        <div class="form-component">
+          <button
+            class="btn btn-outline-dark btn-dark"
+            onclick="handleRegister()"
+          >
+            Register
+          </button>
+        </div>
+        <div class="form-component">
+          <p>Create an account <a href="/login">Login Here</a></p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<script>
+  const handleRegister = async () => {
+    const name = document.querySelector('input[name="name"]').value;
+    const username = document.querySelector('input[name="username"]').value;
+    const password = document.querySelector('input[name="password"]').value;
+
+    // check email validation
+    if (!isEmail(username)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    // password validation
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters long");
+      return;
+    }
+
+    // password contains special characters
+    if (!password.match(/[^a-zA-Z0-9]/)) {
+      alert("Password must contain at least one special character");
+      return;
+    }
+
+    await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, username, password }),
+    });
+    location.href = "/login";
+  };
+
+  const isEmail = (email) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+</script>
 
 <%- include("partials/footer") %>
