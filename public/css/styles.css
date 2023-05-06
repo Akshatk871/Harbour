@@ -29,7 +29,7 @@ body{
     margin-right: 5%;
     color: #FFFBEB;
 }
-.carousel{
+/* .carousel{
     position: relative;
 }
 .carousel-item{
@@ -38,16 +38,12 @@ body{
 }
 .carousel-inner{
     overflow:hidden;
-}
+} */
 .row{
     margin:5% 7%;
    
    
-}
-.card{
-    margin: 5%;
-    padding: 5%;
-}  
+} 
 .login-page, .report{
     min-height: 600px;
 }
@@ -111,4 +107,56 @@ footer p{
     text-align: center;
     padding: 3% 15%;
     background-color: rgb(129, 145, 225);
+}
+
+/* Home page background image */
+
+section:nth-of-type(1){
+    justify-content: center;
+}
+
+.quote__container {
+    border-radius: 13px;
+    font-family:"Alkatra", cursive;
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 300px;
+    width: 70%;
+    background: url("https://cdn.pixabay.com/photo/2017/12/27/14/02/friends-3042751_960_720.jpg") center center / cover no-repeat;
+}
+
+.quote_image_overlay {
+    position: absolute;
+    height: 300px;
+    width: 100%;
+    border-radius: 13px;
+    background-color: #0a4065;
+    opacity: 49%;
+}
+
+.quote_image_text {
+    color: #fff;
+    z-index: 3;
+    margin: 0 1rem;
+    text-align: center;
+}
+
+.center{
+    text-align: center;
+    font-family: "Alkatra", cursive;
+}
+/* cards */
+.card{
+    margin: 0%;
+    padding: 5%;
+    height: 90%;
+}   
+.card-title{
+    text-align: center;
+    font-family: "Nunito", sans-serif;
 }
