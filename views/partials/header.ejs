@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+  <style>
+    .hide{
+      display: none;
+    }
+  </style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,14 +41,30 @@
               <li class="nav-item">
                 <a class="nav-link" href="/report">Report</a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+                  <a class="nav-link" id="logout" onclick="handleLogout()">Logout</a>
+                  <a class="nav-link" id="login" href="/login">Login</a>
               </li>
               
             </ul>
           </div>
         </div>
       </nav>
+
+      <script>
+        const handleLogout = ()=>{
+          localStorage.removeItem('htoken');
+          location.href= '/login';
+        }
+
+        let logoutButton = document.querySelector('#logout')
+        if(!localStorage.getItem('htoken')) logoutButton.style.display = "none";;
+
+        let loginButton = document.querySelector('#login')
+        if(localStorage.getItem('htoken')) loginButton.style.display = "none";;
+
+      </script>
       
 
     

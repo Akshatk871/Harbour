@@ -15,11 +15,13 @@
  <%  }) %>  
  
  <script>
+  if(!localStorage.getItem('token')) location.href('/login');
   async function handleAdopt(id) {
   const res = await fetch('/adopt', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'token': localStorage.getItem('token')
     },
     body: JSON.stringify({ id: id })
   });
