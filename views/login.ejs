@@ -4,7 +4,7 @@
     <div class="login-inner">
         <h1 class="login">Login Here</h1>
         <div class="form">
-            <form action="/login" method="post">
+            <div>
                 <div class="form-component">
                     <label for="">Email Id</label>
                     <input class="input" type="email" name="username" id="">
@@ -14,15 +14,44 @@
                     <input class="input" type="password" name="password" id="">
                 </div>
                 <div class="form-component">
-                    <button class=" btn btn-outline-dark btn-dark" type="submit">Login</button>
+                    <button class=" btn btn-outline-dark btn-dark" onclick="handleLogin()">Login</button>
                 </div>
                 <div class="form-component">
                     <p>Create an account <a href="/register">Register Here</a> </p>
                 </div>
-            </form>
+            </div>
         </div>
         
     </div>
 </div>
+
+<script>
+    const handleLogin = async ()=>{
+        const email = document.querySelector('input[name="username"]').value;
+        const password = document.querySelector('input[name="password"]').value;
+
+        if (!isEmail(email)) {
+            alert("Please enter a valid email address");
+            return;
+        }
+
+        let response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
+        response = await response.json();
+        if(response.success) localStorage.setItem('htoken', response.token);
+        alert(response.message);
+        location.href = "/";
+    };
+
+    const isEmail = (email) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+</script>
 
 <%- include("partials/footer") %>

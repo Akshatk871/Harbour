@@ -6,9 +6,13 @@ const mongoose=require("mongoose");
 const session=require("express-session");
 const passport=require("passport");
 const passportLocalMongoose=require("passport-local-mongoose");
+const bcrypt=require("bcrypt");
+const jwt=require("jsonwebtoken");
+const fetchuser = require('./fetchuser');
 
 
 const app=express();
+const secret=process.env.SECRET;
 
 
 app.use(express.static("public"));
@@ -16,14 +20,6 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
 
-app.use(session({
-    secret:process.env.SECRET,
-    resave:false,
-    saveUninitialized:false 
- }));
- 
- app.use(passport.initialize());
- app.use(passport.session());
 
 mongoose.connect(process.env.MONGO, {useNewUrlParser:true});
 
@@ -43,26 +39,9 @@ const petSchema=new mongoose.Schema({
 
 
 
-userSchema.plugin(passportLocalMongoose);
-
 const User = new mongoose.model("User" , userSchema);
 
 const Pet =new mongoose.model("Pet", petSchema);
-
-
-passport.use(User.createStrategy());
-
-passport.serializeUser(function(user, cb) {
-    process.nextTick(function() {
-      cb(null, { id: user.id, username: user.username });
-    });
-  });
-  
-  passport.deserializeUser(function(user, cb) {
-    process.nextTick(function() {
-      return cb(null, user);
-    });
-  });
 
 const pet1= new Pet({
     name:"Golden Retriever",
@@ -109,8 +88,6 @@ const pet6= new Pet({
 
 const defaultPet=[pet1, pet2, pet3, pet4, pet5, pet6];
 
-
-
 app.get("/", function(req,res){
     res.render("home");
 });
@@ -124,19 +101,7 @@ app.get("/register", (req,res)=>{
 
     
 app.get("/adopt", (req,res)=>{
-    
-    if(req.isAuthenticated()){
-        Pet.find({}).then((foundPet)=>{
-            if(foundPet.length===0){
-                Pet.insertMany(defaultPet);
-            }
-            res.render("adopt",{newPet: foundPet} );
-        });
-    
-    }
-    else{
-        res.redirect("/login");
-    }    
+   return res.render("adopt");
 });
 
 app.post("/adopt", async (req,res)=>{
@@ -158,36 +123,65 @@ app.get("/about", (req,res)=>{
     res.render("about");
 });
 
-app.post("/login",(req,res)=>{
-    const user=new User({
-        username:req.body.username, 
-        password:req.body.password
-    });
-    req.login(user,(err)=>{
+app.post("/login", async (req,res)=>{
+   const {email, password}=req.body;
 
-        if(err)
+    if(!isEmail(email)){
+        return res.json({message:"Invalid email"});
+    }
+
+    try{
+        let user = await User.findOne({email:email});
+        if(!user){
+            return res.json({message:"User does not exist"});
+        }
+        const match = await bcrypt.compare(password.toString(), user.password);
+        if(!match){
+            return res.json({message:"Invalid credentials"});
+        }
+        const payload = {
+            user: {
+                id: user.id
+            }
+        }
+        const token = jwt.sign(payload, secret);
+        return res.json({success: true,token: token, message:"User logged in successfully"});
+
+    }catch(err){
         console.log(err);
-        else{
-            passport.authenticate("local")(req, res, ()=>{
-                res.redirect("/");
-            });
-        }
+        return res.json({message:"Something went wrong"});
+    }
+});
 
-    });
-});
-app.post("/register",(req,res)=>{
-    User.register({username:req.body.username, name: req.body.name}, req.body.password , (err, user)=>{
-        if(err){
-            console.log(err);
-            res.redirect("/register");
+app.post("/register", async (req,res)=>{
+   const {name, email, password}=req.body;
+
+   if(!isEmail(email)){
+         return res.json({message:"Invalid email"});
+    }
+
+    try{
+        let user = await User.findOne({email});
+        if(user){
+            return res.json({message:"User already exists"});
         }
-        else{
-            passport.authenticate("local")(req, res , function(){
-                res.redirect("/");
-            });
-        }
-    }); 
+        const securedPassword = await bcrypt.hash(password.toString(), 10);
+        user = await User.create({
+            name,
+            email,
+            password:securedPassword
+        });
+        return res.json({message:"User created successfully"});
+    }catch(err){
+        console.log(err);
+        return res.json({message:"Something went wrong"});
+    }
 });
+
+const isEmail = (email) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
 
 app.listen(3000,function(){
     console.log("Server running at 3000.");
