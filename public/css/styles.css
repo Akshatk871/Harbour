@@ -156,3 +156,26 @@ section:nth-of-type(1){
     text-align: center;
     font-family: "Nunito", sans-serif;
 }
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}
+.navbar {
+  background-image: linear-gradient(to right, #f8ca66, #f3b836);
+}
+section h2 {
+  font-size: 3rem;
+  color: #222;
+  margin-bottom: 2rem;
+}
+.quote_image_text {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+}
+.form {
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}
+footer {
+  background-color: #222;
+  padding: 2rem 0;
+}
