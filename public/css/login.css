@@ -1,0 +1,69 @@
+body {
+	font-family: 'Alkatra', sans-serif;
+	color: #ffffff;
+}
+
+.height-vh{
+    height: 72vh;
+}
+
+.cont {
+	margin: 0 auto;
+	margin-left: 70%;
+	margin-top: 50px;
+	max-width: 400px;
+	padding: 40px;
+	background-color: rgba(10, 14, 31, 0.329);
+	border-radius: 5px;
+	box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+	text-align: center;
+}
+
+.h1 {
+	font-size: 48px;
+	margin-bottom: 20px;
+}
+
+label {
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] , input[type="email"]{
+	padding: 10px 20px;
+	margin-bottom: 20px;
+	border: none;
+	border-radius: 30px;
+	background-color: #F2F2F2;
+	font-size: 16px;
+	color: #813ae4;
+	width: 100%;
+}
+
+button[type="submit"] {
+    background-color: rgb(129, 145, 225);
+	color: #ffffff;
+	border: none;
+	border-radius: 30px;
+	padding: 10px 40px;
+	margin-top: 20px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: rgb(129, 145, 225);
+}
+
+.signup-link {
+	font-size: 16px;
+	margin-top: 20px;
+}
+
+.signup-link a {
+	text-decoration: none;
+	font-weight: bold;
+}
