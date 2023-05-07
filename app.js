@@ -216,3 +216,16 @@ const isEmail = (email) => {
 app.listen(3000,function(){
     console.log("Server running at 3000.");
 });
+app.use(session({
+    secret: 'mysecretkey',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+pp.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+app.get("/logout", (req, res) => {
+    req.logout();
+    req.flash("success", "You have been logged out");
+    res.redirect("/");
+  });
