@@ -1,5 +1,5 @@
 <%- include("partials/header") %>
-<div class="login-page">
+<!-- <div class="login-page">
     <img class="background-image" src="/images/login-background.jpg" alt="">
     <div class="login-inner">
         <h1 class="login">Login Here</h1>
@@ -22,6 +22,23 @@
             </div>
         </div>
         
+    </div>
+</div> -->
+
+<div class="height-vh">
+    <img class="background-image" src="/images/login-background.jpg" alt="">
+    <div class="cont">
+        <form action="#" method="POST">
+            <h1 class="h1">Pet Adoption</h1>
+            <label for="">Email Id</label>
+            <input type="email" placeholder="Enter your email" name="email" id="" class="input" required>
+            <label for="">Password</label>
+            <input type="password" placeholder="Enter your password" class="input" id="" name="password" required>
+            <button type="submit" onclick="handleLogin()">Login</button>
+            <div class="signup-link">
+                Don't have an account? <a href="/register">Sign up</a>
+            </div>
+        </form>
     </div>
 </div>
 
