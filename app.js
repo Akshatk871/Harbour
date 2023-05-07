@@ -3,9 +3,6 @@ const express=require("express");
 const bodyParser=require("body-parser");
 const ejs =require("ejs");
 const mongoose=require("mongoose");
-const session=require("express-session");
-const passport=require("passport");
-const passportLocalMongoose=require("passport-local-mongoose");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const fetchuser = require('./fetchuser');
@@ -34,14 +31,19 @@ const petSchema=new mongoose.Schema({
     rating: Number,
     about:String,
     image:String,
-    adopt: Boolean
+    adopt: Boolean,
 });
 
-
-
 const User = new mongoose.model("User" , userSchema);
-
 const Pet =new mongoose.model("Pet", petSchema);
+
+const adoptSchema=new mongoose.Schema({
+    petId: {type: mongoose.Schema.Types.ObjectId, ref: 'Pet'},
+    userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    date: {type : Date, default: Date.now}
+});
+
+const Adopt =new mongoose.model("Adopt", adoptSchema);
 
 const pet1= new Pet({
     name:"Golden Retriever",
@@ -100,13 +102,41 @@ app.get("/register", (req,res)=>{
 })
 
     
-app.get("/adopt", (req,res)=>{
-   return res.render("adopt");
+app.get("/adopt", async (req,res)=>{
+    const pets = await Pet.find({});
+   return res.render("adopt", {newPet: pets});
 });
 
-app.post("/adopt", async (req,res)=>{
-    const pet = await Pet.findByIdAndUpdate(req.body.id, {adopt:true});
-    res.json({message:"Congrats! You have adopted "+pet.name});
+app.post("/adopt",fetchuser, async (req,res)=>{
+    const petID = req.body.id;
+
+    try{
+    let pet = await Pet.findById(petID);
+    if(!pet){
+        return res.json({message:"Pet not found"});
+    }
+
+    if(pet.adopt){
+        return res.json({message:"Pet already adopted"});
+    }
+
+    let user = await User.findById(req.user.id);
+    if(!user){
+        return res.json({message:"User not found"});
+    }
+
+    const adopt = await Adopt.create({
+        petId: petID,
+        userId: req.user.id
+    });
+
+    await Pet.updateOne({adopt: true});
+
+    return res.json({message:`${pet.name} adopted successfully`});
+}catch(err){
+    console.log(err);
+    return res.json({message:"Something went wrong"});
+}   
 });
 
 app.get("/logout", (req,res)=>{
