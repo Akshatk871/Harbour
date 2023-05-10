@@ -229,4 +229,4 @@ app.get("/logout", (req, res) => {
     req.flash("success", "You have been logged out");
     res.redirect("/");
   });
-
+  
